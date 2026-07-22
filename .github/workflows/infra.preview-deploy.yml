@@ -36,26 +36,6 @@ jobs:
       - name: "Terraform format"
         run: |
           terraform fmt -check
-
-      - name: "Show GitHub OIDC claims"
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const token = await core.getIDToken('sts.amazonaws.com');
-
-            const payload = JSON.parse(
-              Buffer.from(
-                token.split('.')[1],
-                'base64url'
-              ).toString('utf8')
-            );
-
-            core.info(`aud=${payload.aud}`);
-            core.info(`sub=${payload.sub}`);
-            core.info(`repository_owner_id=${payload.repository_owner_id}`);
-            core.info(`repository_id=${payload.repository_id}`);
-            core.info(`ref=${payload.ref}`);
-
       - name: "Configure AWS credentials"
         uses: aws-actions/configure-aws-credentials@v6
         with:
