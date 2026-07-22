@@ -16,6 +16,8 @@ permissions:
 env:
   TF_VERSION: "1.14.6"
   AWS_REGION: "ap-southeast-1"
+  PROJECT_NAME: "tasty-log"
+  ENVIRONMENT: "dev"
 
 defaults:
   run:
@@ -47,3 +49,13 @@ jobs:
       - name: "Terraform validate"
         run: |
           terraform validate -no-color
+      - name: "Terraform plan"
+        run: |
+          terraform plan \
+          -var 'project=${{ env.PROJECT_NAME }}' \
+          -var 'environment=${{ env.ENVIRONMENT }}' \
+          -var 'username=${{ secrets.MYSQL_USERNAME }}' \
+          -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
+          -interactive=false \
+          -no-color \
+          -detailed-exitcode
