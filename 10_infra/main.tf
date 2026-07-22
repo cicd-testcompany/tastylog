@@ -10,10 +10,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket  = "tastylog-tfstate-bucket-sato"
-    key     = "tastylog-dev.tfstate"
-    region  = "ap-northeast-1"
-    profile = "terraform"
+    bucket = "tastylog-tfstate-bucket-sato"
+    key    = "tastylog-dev.tfstate"
+    region = "ap-northeast-1"
   }
 }
 
