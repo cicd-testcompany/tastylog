@@ -29,7 +29,7 @@ jobs:
     name: "Preview"
     runs-on: ubuntu-latest
     outputs:
-      plan-status: ${{ steps.plan.outputs.exitcode }}
+      TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
