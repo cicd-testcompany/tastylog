@@ -64,27 +64,27 @@ jobs:
           -input=false \
           -no-color \
           -detailed-exitcode
-       - name: Slack notify
-         uses: slackapi/slack-github-action@v4.0.0
-         with:
-           method: chat.postMessage
-           token: ${{ secrets.SLACK_BOT_TOKEN }}
-           errors: true
+      - name: Slack notify
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          errors: true
 
-           payload: |
-             channel: "${{ secrets.SLACK_CHANNEL_ID }}"
-             text: "GitHub Actions notification test: ${{ job.status }}"
+          payload: |
+            channel: "${{ secrets.SLACK_CHANNEL_ID }}"
+            text: "GitHub Actions notification test: ${{ job.status }}"
 
-             blocks:
-               - type: "header"
-                 text:
-                   type: "plain_text"
-                   text: "Request for approve"
-                   emoji: true
+            blocks:
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: "Request for approve"
+                  emoji: true
 
-               - type: "section"
-                 text:
-                   type: "mrkdwn"
-                   text: |
-                     <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}>
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: |
+                    <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}>
                      *GitHub Action build result:* `${{ job.status }}`
